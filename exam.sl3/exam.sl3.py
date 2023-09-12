@@ -3,7 +3,7 @@ import re
 import datetime
 
 
-# Функція для отримання курсу долара
+
 def get_dollar_rate():
     url = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=USD&json"
     response = requests.get(url)
@@ -11,7 +11,7 @@ def get_dollar_rate():
     return data[0]['rate']
 
 
-# Запит у користувача для вибору опції
+
 while True:
     option = input(
         "Виберіть необхідну опцію (1 - купівля валюти у NBU, 2 - дізнатися про температуру повітря у Києві): ")
@@ -28,8 +28,7 @@ if option == '1':
     if dollar_rate:
         result = hrn_amount / dollar_rate
 
-        # Збереження в базу даних (ви можете використати SQLite або будь-яку іншу БД)
-        # Наприклад, якщо ви використовуєте SQLite:
+      
         import sqlite3
 
         conn = sqlite3.connect('converter.db')
@@ -47,7 +46,7 @@ if option == '1':
         print("Не вдалося отримати курс долара.")
 
 elif option == '2':
-    # Отримання температури повітря у Києві
+  
     response = requests.get("https://www.metoffice.gov.uk/weather/forecast/gcvwr3zrw#?date=2023-09-12")
     content = response.text
     match = re.search(r'<span class="temperature-value">([\d.]+)</span>', content)
@@ -55,8 +54,7 @@ elif option == '2':
     if match:
         temperature = match.group(1)
 
-        # Збереження в базу даних (ви можете використати SQLite або будь-яку іншу БД)
-        # Наприклад, якщо ви використовуєте SQLite:
+       
         import sqlite3
 
         conn = sqlite3.connect('converter.db')
